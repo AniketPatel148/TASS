@@ -1,0 +1,56 @@
+{
+  "cluster": {
+    "num_workers": 4,
+    "memory_gb": 40.0,
+    "max_batch_size": 16
+  },
+  "workload": {
+    "type": "bursty",
+    "rps": 10,
+    "peak_rps": 50,
+    "burst_duration_ms": 3000,
+    "idle_duration_ms": 2000,
+    "duration_ms": 30000,
+    "context_tokens": { "min": 512, "max": 4096 },
+    "output_tokens": { "min": 64, "max": 512 },
+    "tier_weights": {
+      "free": 0.6,
+      "pro": 0.3,
+      "enterprise": 0.1
+    },
+    "seed": 42
+  },
+  "scheduler": "fifo",
+  "tiers": [
+    {
+      "name": "free",
+      "priority": 3,
+      "weight": 1.0,
+      "sla_ttft_ms": 5000,
+      "sla_total_ms": 30000
+    },
+    {
+      "name": "pro",
+      "priority": 2,
+      "weight": 3.0,
+      "sla_ttft_ms": 2000,
+      "sla_total_ms": 15000
+    },
+    {
+      "name": "enterprise",
+      "priority": 1,
+      "weight": 10.0,
+      "sla_ttft_ms": 500,
+      "sla_total_ms": 5000
+    }
+  ],
+  "timing": {
+    "base_ms": 5.0,
+    "per_token_ms": 0.01,
+    "per_batch_ms": 2.0,
+    "kv_per_token_gb": 0.000128
+  },
+  "sim": {
+    "sample_interval_ms": 1000
+  }
+}
