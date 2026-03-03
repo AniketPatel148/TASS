@@ -6,26 +6,26 @@ A production-quality discrete-event simulator for multi-tenant LLM inference sch
 
 ```bash
 # Build
-go build ./cmd/sim
+go build ./cmd/tass
 
 # Run with default config (bursty stress scenario)
-go run ./cmd/sim --config examples/config.json --out out/
+go run ./cmd/tass --config examples/config.json --out out/
 
 # Compare all scheduling policies
-go run ./cmd/sim --config examples/config.json --out out/ --compare
+go run ./cmd/tass --config examples/config.json --out out/ --compare
 
 # Verbose mode (logs every event)
-go run ./cmd/sim --config examples/config.json --out out/ --verbose
+go run ./cmd/tass --config examples/config.json --out out/ --verbose
 ```
 
 ## Architecture
 
 ```
-cmd/sim/main.go              CLI entry point
+cmd/tass/main.go             CLI entry point
 internal/
   config/config.go           JSON configuration loading + validation
-  sim/event.go               Event types (Arrival, Dispatch, TokenStepDone, ...)
-  sim/engine.go              Discrete-event engine with priority queue
+  engine/event.go            Event types (Arrival, Dispatch, TokenStepDone, ...)
+  engine/engine.go           Discrete-event engine with priority queue
   model/request.go           Request struct with scheduling state
   model/cluster.go           Worker + Cluster with KV-cache memory tracking
   model/kvcache.go           KV-cache memory model
