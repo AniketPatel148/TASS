@@ -1,0 +1,62 @@
+{
+  "SchedulerName": "dynbatch",
+  "TotalRequests": 1792,
+  "TotalTokensGen": 144602,
+  "SimDurationMs": 92886.07896559092,
+  "ThroughputTokSec": 1556.767188477909,
+  "AvgUtilization": 0.9904693981885271,
+  "OverallP50Ms": 17108.33434166308,
+  "OverallP95Ms": 31589.865478483996,
+  "OverallP99Ms": 33385.88143135677,
+  "FairnessIndex": 0.9994921999259427,
+  "TierMetrics": [
+    {
+      "Tier": "free",
+      "Count": 1064,
+      "AvgTTFTMs": 14153.975272102007,
+      "P50TTFTMs": 13715.555619784594,
+      "P95TTFTMs": 27897.47648197861,
+      "P99TTFTMs": 28804.878935587458,
+      "AvgLatencyMs": 17644.326553959938,
+      "P50LatencyMs": 17526.80031043077,
+      "P95LatencyMs": 31661.27054056816,
+      "P99LatencyMs": 33503.58041021655,
+      "AvgQueueMs": 14110.98167002022,
+      "AvgTokPerSec": 7.126397951853991,
+      "SLATTFTViol": 0.8045112781954887,
+      "SLATotalViol": 0.11090225563909774
+    },
+    {
+      "Tier": "pro",
+      "Count": 555,
+      "AvgTTFTMs": 13001.445711870596,
+      "P50TTFTMs": 12745.43113224247,
+      "P95TTFTMs": 27570.255220252882,
+      "P99TTFTMs": 28714.07419019453,
+      "AvgLatencyMs": 16376.211457177162,
+      "P50LatencyMs": 16121.501700731162,
+      "P95LatencyMs": 31140.8271984721,
+      "P99LatencyMs": 32916.65027745825,
+      "AvgQueueMs": 12957.357222390321,
+      "AvgTokPerSec": 7.256694258205917,
+      "SLATTFTViol": 0.827027027027027,
+      "SLATotalViol": 0.5387387387387388
+    },
+    {
+      "Tier": "enterprise",
+      "Count": 173,
+      "AvgTTFTMs": 14610.589999883485,
+      "P50TTFTMs": 14508.36840560647,
+      "P95TTFTMs": 28096.954429030993,
+      "P99TTFTMs": 28554.697093033625,
+      "AvgLatencyMs": 18158.971583488306,
+      "P50LatencyMs": 17743.343257884753,
+      "P95LatencyMs": 31686.192512220678,
+      "P99LatencyMs": 32657.308183322806,
+      "AvgQueueMs": 14566.377056427978,
+      "AvgTokPerSec": 6.872119411702239,
+      "SLATTFTViol": 0.8554913294797688,
+      "SLATotalViol": 0.930635838150289
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "SchedulerName": "priority",
+  "TotalRequests": 1195,
+  "TotalTokensGen": 341602,
+  "SimDurationMs": 260739.10726762508,
+  "ThroughputTokSec": 1310.129514439798,
+  "AvgUtilization": 0.9961146115287058,
+  "OverallP50Ms": 105989.48921964176,
+  "OverallP95Ms": 206149.13820662908,
+  "OverallP99Ms": 237701.00008457378,
+  "FairnessIndex": 0.9327085224295288,
+  "TierMetrics": [
+    {
+      "Tier": "free",
+      "Count": 23,
+      "AvgTTFTMs": 180739.61318197343,
+      "P50TTFTMs": 199223.53861591162,
+      "P95TTFTMs": 217649.15730464508,
+      "P99TTFTMs": 221291.78793990728,
+      "AvgLatencyMs": 198902.93358276485,
+      "P50LatencyMs": 214569.3184882441,
+      "P95LatencyMs": 241947.44548996497,
+      "P99LatencyMs": 250001.91576886375,
+      "AvgQueueMs": 180651.0290534796,
+      "AvgTokPerSec": 2.1952243224916823,
+      "SLATTFTViol": 0.9130434782608695,
+      "SLATotalViol": 0.9130434782608695
+    },
+    {
+      "Tier": "pro",
+      "Count": 85,
+      "AvgTTFTMs": 169547.04497812854,
+      "P50TTFTMs": 189650.8069055772,
+      "P95TTFTMs": 208330.05593600473,
+      "P99TTFTMs": 208834.2618689226,
+      "AvgLatencyMs": 192750.06187222782,
+      "P50LatencyMs": 208355.28905785206,
+      "P95LatencyMs": 242792.07825551444,
+      "P99LatencyMs": 245996.30670178164,
+      "AvgQueueMs": 169458.71764296564,
+      "AvgTokPerSec": 2.529814405552963,
+      "SLATTFTViol": 0.8823529411764706,
+      "SLATotalViol": 0.9882352941176471
+    },
+    {
+      "Tier": "enterprise",
+      "Count": 1087,
+      "AvgTTFTMs": 73551.8474962128,
+      "P50TTFTMs": 73708.44045286282,
+      "P95TTFTMs": 147253.25202943536,
+      "P99TTFTMs": 155432.73937064508,
+      "AvgLatencyMs": 99995.51486964482,
+      "P50LatencyMs": 101423.46645751206,
+      "P95LatencyMs": 175110.5851049026,
+      "P99LatencyMs": 189785.336346822,
+      "AvgQueueMs": 73461.29669453981,
+      "AvgTokPerSec": 3.9927268854723112,
+      "SLATTFTViol": 0.889604415823367,
+      "SLATotalViol": 0.9972401103955841
+    }
+  ]
+}

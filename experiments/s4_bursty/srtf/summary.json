@@ -1,0 +1,62 @@
+{
+  "SchedulerName": "srtf",
+  "TotalRequests": 1790,
+  "TotalTokensGen": 515396,
+  "SimDurationMs": 387972.86403092195,
+  "ThroughputTokSec": 1328.4331142265721,
+  "AvgUtilization": 0.9916517324099082,
+  "OverallP50Ms": 103309.16965125733,
+  "OverallP95Ms": 331546.9228806506,
+  "OverallP99Ms": 363309.3252415101,
+  "FairnessIndex": 0.9979080713481135,
+  "TierMetrics": [
+    {
+      "Tier": "free",
+      "Count": 1071,
+      "AvgTTFTMs": 103505.55266407406,
+      "P50TTFTMs": 73672.02228384372,
+      "P95TTFTMs": 289030.70775769034,
+      "P99TTFTMs": 321625.07984308567,
+      "AvgLatencyMs": 129897.3421254535,
+      "P50LatencyMs": 99761.05450252342,
+      "P95LatencyMs": 332069.4918960616,
+      "P99LatencyMs": 361444.43992582586,
+      "AvgQueueMs": 103414.38665568974,
+      "AvgTokPerSec": 4.51416169542563,
+      "SLATTFTViol": 0.7544351073762838,
+      "SLATotalViol": 0.7329598506069094
+    },
+    {
+      "Tier": "pro",
+      "Count": 525,
+      "AvgTTFTMs": 106596.30261680568,
+      "P50TTFTMs": 81106.63987335406,
+      "P95TTFTMs": 290845.3772239834,
+      "P99TTFTMs": 328169.97801219265,
+      "AvgLatencyMs": 133188.39170078823,
+      "P50LatencyMs": 106557.93487799042,
+      "P95LatencyMs": 334001.783232925,
+      "P99LatencyMs": 364539.09962019953,
+      "AvgQueueMs": 106504.96518671703,
+      "AvgTokPerSec": 4.281507084879805,
+      "SLATTFTViol": 0.819047619047619,
+      "SLATotalViol": 0.8628571428571429
+    },
+    {
+      "Tier": "enterprise",
+      "Count": 194,
+      "AvgTTFTMs": 101854.98118078247,
+      "P50TTFTMs": 82314.2431566118,
+      "P95TTFTMs": 269163.4238106327,
+      "P99TTFTMs": 310401.98821742047,
+      "AvgLatencyMs": 128360.17589956132,
+      "P50LatencyMs": 107415.38246387229,
+      "P95LatencyMs": 311126.66532821825,
+      "P99LatencyMs": 353185.6159168632,
+      "AvgQueueMs": 101763.49779649061,
+      "AvgTokPerSec": 4.034589578717251,
+      "SLATTFTViol": 0.8814432989690721,
+      "SLATotalViol": 1
+    }
+  ]
+}

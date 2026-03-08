@@ -1,0 +1,62 @@
+{
+  "SchedulerName": "srtf",
+  "TotalRequests": 900,
+  "TotalTokensGen": 583533,
+  "SimDurationMs": 404908.3048112875,
+  "ThroughputTokSec": 1441.148509591481,
+  "AvgUtilization": 0.9968169044550843,
+  "OverallP50Ms": 143665.53342176357,
+  "OverallP95Ms": 357392.84856800945,
+  "OverallP99Ms": 380875.36531889904,
+  "FairnessIndex": 0.9990305298989551,
+  "TierMetrics": [
+    {
+      "Tier": "free",
+      "Count": 531,
+      "AvgTTFTMs": 112303.19529192607,
+      "P50TTFTMs": 93453.66803230255,
+      "P95TTFTMs": 289324.5935305331,
+      "P99TTFTMs": 318647.7527844182,
+      "AvgLatencyMs": 166298.43872280436,
+      "P50LatencyMs": 141783.59419871215,
+      "P95LatencyMs": 358426.3846296148,
+      "P99LatencyMs": 383056.946383519,
+      "AvgQueueMs": 112223.5321429582,
+      "AvgTokPerSec": 5.7827470672475725,
+      "SLATTFTViol": 0.7928436911487758,
+      "SLATotalViol": 0.9453860640301318
+    },
+    {
+      "Tier": "pro",
+      "Count": 286,
+      "AvgTTFTMs": 108973.90793720423,
+      "P50TTFTMs": 89008.51701125469,
+      "P95TTFTMs": 290640.2548647453,
+      "P99TTFTMs": 311028.24307659565,
+      "AvgLatencyMs": 160548.60805095488,
+      "P50LatencyMs": 137328.96472161103,
+      "P95LatencyMs": 360607.41750099114,
+      "P99LatencyMs": 379238.36545571,
+      "AvgQueueMs": 108892.92687177242,
+      "AvgTokPerSec": 5.361975752791002,
+      "SLATTFTViol": 0.8636363636363636,
+      "SLATotalViol": 1
+    },
+    {
+      "Tier": "enterprise",
+      "Count": 83,
+      "AvgTTFTMs": 116384.20360064063,
+      "P50TTFTMs": 109992.94441186715,
+      "P95TTFTMs": 265795.67356418516,
+      "P99TTFTMs": 290613.23368054617,
+      "AvgLatencyMs": 171616.32019879526,
+      "P50LatencyMs": 159931.02378686727,
+      "P95LatencyMs": 341170.8017328055,
+      "P99LatencyMs": 363208.1527913126,
+      "AvgQueueMs": 116305.28382704282,
+      "AvgTokPerSec": 5.634112354060217,
+      "SLATTFTViol": 0.8072289156626506,
+      "SLATotalViol": 1
+    }
+  ]
+}

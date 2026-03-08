@@ -1,0 +1,62 @@
+{
+  "SchedulerName": "dynbatch",
+  "TotalRequests": 1195,
+  "TotalTokensGen": 341602,
+  "SimDurationMs": 331992.71494132467,
+  "ThroughputTokSec": 1028.9442648172978,
+  "AvgUtilization": 0.9893860974429507,
+  "OverallP50Ms": 142170.4480026845,
+  "OverallP95Ms": 258855.08614503883,
+  "OverallP99Ms": 270246.39325863315,
+  "FairnessIndex": 0.9987098687700631,
+  "TierMetrics": [
+    {
+      "Tier": "free",
+      "Count": 699,
+      "AvgTTFTMs": 121128.82398491506,
+      "P50TTFTMs": 124379.53010225121,
+      "P95TTFTMs": 242294.06997055802,
+      "P99TTFTMs": 244121.97413426248,
+      "AvgLatencyMs": 139154.7361780432,
+      "P50LatencyMs": 142326.34583370798,
+      "P95LatencyMs": 258525.32872366434,
+      "P99LatencyMs": 270567.21638955467,
+      "AvgQueueMs": 121065.5714779445,
+      "AvgTokPerSec": 3.6262848577084155,
+      "SLATTFTViol": 0.8755364806866953,
+      "SLATotalViol": 0.9027181688125894
+    },
+    {
+      "Tier": "pro",
+      "Count": 391,
+      "AvgTTFTMs": 124326.4476500204,
+      "P50TTFTMs": 127344.37823312522,
+      "P95TTFTMs": 239429.5656521113,
+      "P99TTFTMs": 244201.61902492782,
+      "AvgLatencyMs": 142488.00242072484,
+      "P50LatencyMs": 145044.54653535405,
+      "P95LatencyMs": 258065.84526496538,
+      "P99LatencyMs": 268976.5991778777,
+      "AvgQueueMs": 124263.61671294425,
+      "AvgTokPerSec": 3.3676795824588086,
+      "SLATTFTViol": 0.9156010230179028,
+      "SLATotalViol": 0.9744245524296675
+    },
+    {
+      "Tier": "enterprise",
+      "Count": 105,
+      "AvgTTFTMs": 119640.5734197183,
+      "P50TTFTMs": 117249.9272651868,
+      "P95TTFTMs": 242574.49243892168,
+      "P99TTFTMs": 244197.98983057213,
+      "AvgLatencyMs": 138431.1093182472,
+      "P50LatencyMs": 131585.90063987527,
+      "P95LatencyMs": 263577.982459392,
+      "P99LatencyMs": 268249.83568478853,
+      "AvgQueueMs": 119577.01138597263,
+      "AvgTokPerSec": 3.6486405538266036,
+      "SLATTFTViol": 0.8857142857142857,
+      "SLATotalViol": 1
+    }
+  ]
+}

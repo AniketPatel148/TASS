@@ -1,0 +1,62 @@
+{
+  "SchedulerName": "fifo",
+  "TotalRequests": 1195,
+  "TotalTokensGen": 341602,
+  "SimDurationMs": 264505.2764977195,
+  "ThroughputTokSec": 1291.4751816035896,
+  "AvgUtilization": 0.9802226122771442,
+  "OverallP50Ms": 110874.1917408027,
+  "OverallP95Ms": 191365.41693552354,
+  "OverallP99Ms": 199991.34169670858,
+  "FairnessIndex": 0.993163346613105,
+  "TierMetrics": [
+    {
+      "Tier": "free",
+      "Count": 17,
+      "AvgTTFTMs": 93619.93987721372,
+      "P50TTFTMs": 118922.07353479636,
+      "P95TTFTMs": 166963.1161380783,
+      "P99TTFTMs": 170090.91377203364,
+      "AvgLatencyMs": 117594.83741941555,
+      "P50LatencyMs": 158180.47165979625,
+      "P95LatencyMs": 189318.27744332637,
+      "P99LatencyMs": 194353.96466106563,
+      "AvgQueueMs": 93529.80214086917,
+      "AvgTokPerSec": 3.499596105973321,
+      "SLATTFTViol": 0.8823529411764706,
+      "SLATotalViol": 0.8823529411764706
+    },
+    {
+      "Tier": "pro",
+      "Count": 77,
+      "AvgTTFTMs": 77573.98546072659,
+      "P50TTFTMs": 81058.15409925827,
+      "P95TTFTMs": 156132.81750445013,
+      "P99TTFTMs": 167637.06798818812,
+      "AvgLatencyMs": 105311.8107253764,
+      "P50LatencyMs": 104617.96613373594,
+      "P95LatencyMs": 188799.36991449565,
+      "P99LatencyMs": 195355.39237171187,
+      "AvgQueueMs": 77484.1184225417,
+      "AvgTokPerSec": 4.276167987752517,
+      "SLATTFTViol": 0.8701298701298701,
+      "SLATotalViol": 0.974025974025974
+    },
+    {
+      "Tier": "enterprise",
+      "Count": 1101,
+      "AvgTTFTMs": 82960.25820449431,
+      "P50TTFTMs": 82236.67029531198,
+      "P95TTFTMs": 167120.15078582888,
+      "P99TTFTMs": 174691.5894418185,
+      "AvgLatencyMs": 108908.04194454127,
+      "P50LatencyMs": 111124.22018143622,
+      "P95LatencyMs": 191366.19576864157,
+      "P99LatencyMs": 200127.8642760297,
+      "AvgQueueMs": 82869.96809082055,
+      "AvgTokPerSec": 3.795453744701988,
+      "SLATTFTViol": 0.8910081743869209,
+      "SLATotalViol": 0.997275204359673
+    }
+  ]
+}
