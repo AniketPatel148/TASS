@@ -39,7 +39,7 @@ func (tm *TimingModel) StepMs(batchSize int, avgSeqLen float64) float64 {
 
 // PrefillMs computes the time for prefill (processing all context tokens for a new request).
 // Prefill is typically more compute-bound and processes all context tokens at once.
-// Simplified: prefill_ms ≈ base_ms + per_token_ms * context_tokens
-func (tm *TimingModel) PrefillMs(contextTokens int) float64 {
-	return tm.BaseMs + tm.PerTokenMs*float64(contextTokens)
+// Simplified: prefill_ms ≈ base_ms + per_token_ms * (context_tokens - matched_prefix)
+func (tm *TimingModel) PrefillMs(contextTokens int, matchedPrefix int) float64 {
+	return tm.BaseMs + tm.PerTokenMs*float64(contextTokens-matchedPrefix)
 }

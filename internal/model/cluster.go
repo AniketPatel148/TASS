@@ -156,11 +156,12 @@ func (w *Worker) BatchAvgSeqLen() float64 {
 	if len(w.Batch) == 0 {
 		return 0
 	}
-	var total int
+	var total float64
 	for _, r := range w.Batch {
-		total += r.TotalTokens()
+		// Cached prefixes are already processed, skip their compute overhead
+		total += float64(r.TotalTokens() - r.MatchedPrefixTokens)
 	}
-	return float64(total) / float64(len(w.Batch))
+	return total / float64(len(w.Batch))
 }
 
 // Cluster represents the simulated GPU cluster.

@@ -146,6 +146,27 @@ func (e *Engine) handleTokenStepDone(ev *Event) {
 		}
 	}
 
+	// If using PagedAttention, check for OOM and evict if necessary
+	if w.PagedAttention {
+		for w.UsedMemoryGB(e.cfg.Timing.KVPerTokenGB) > w.MemoryGB && len(w.Batch) > 0 {
+			var victim *model.Request
+			for _, r := range w.Batch {
+				// Evict the request with the fewest generated tokens (most recent)
+				if victim == nil || r.GeneratedTokens < victim.GeneratedTokens {
+					victim = r
+				}
+			}
+			if victim != nil {
+				victim.Preemptions++
+				w.Evict(victim)
+				e.sched.Enqueue(victim)
+				if e.verbose {
+					log.Printf("[%.2fms] OOM PREEMPT req=%d worker=%d total_preempt=%d", e.clock, victim.ID, w.ID, victim.Preemptions)
+				}
+			}
+		}
+	}
+
 	// If there are still active requests in the batch, schedule next step
 	if len(w.Batch) > 0 {
 		// Try to fill empty slots in the batch with waiting requests

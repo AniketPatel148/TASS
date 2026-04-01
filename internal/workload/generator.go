@@ -164,12 +164,18 @@ func makeRequest(id int, arrivalMs float64, cfg *config.Config, rng *util.RNG) *
 
 	tier := pickTier(cfg, rng)
 
+	prefixID := ""
+	if cfg.Workload.PrefixHitRate > 0 && rng.Float64() < cfg.Workload.PrefixHitRate {
+		prefixID = "system_prompt_v1"
+	}
+
 	return &model.Request{
 		ID:            id,
 		Tier:          tier,
 		ContextTokens: contextTokens,
 		OutputTokens:  outputTokens,
 		ArrivalMs:     arrivalMs,
+		PrefixID:      prefixID,
 		WorkerID:      -1,
 	}
 }
