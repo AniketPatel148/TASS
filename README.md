@@ -1,6 +1,6 @@
 # TASS — Token-Aware Scheduling Simulator
 
-A production-quality discrete-event simulator for multi-tenant LLM inference scheduling. Models token-by-token autoregressive decoding, KV-cache memory growth, bursty arrivals, user tiers, dynamic batching, and five scheduling policies.
+My personal sandbox for exploring the frontier of continuous batching and memory-aware scheduling. A production-quality discrete-event simulator modeling multi-tenant LLM inference, PagedAttention (with Recomputation Preemption), Prefix Caching, dynamic batching, and priority queuing.
 
 ## Quick Start
 
@@ -8,49 +8,20 @@ A production-quality discrete-event simulator for multi-tenant LLM inference sch
 # Build
 go build ./cmd/tass
 
-# Run with default config (bursty stress scenario)
-go run ./cmd/tass --config examples/config.json --out out/
+# Run baseline FIFO scheduler vs PagedAttention/PrefixCaching simulator
+go run ./cmd/tass --config experiments/s4_bursty/config.json --out out/baseline_srtf --verbose
+go run ./cmd/tass --config experiments/s4_bursty/config_paged.json --out out/paged_srtf --verbose
 
-# Compare all scheduling policies
-go run ./cmd/tass --config examples/config.json --out out/ --compare
-
-# Verbose mode (logs every event)
-go run ./cmd/tass --config examples/config.json --out out/ --verbose
+# Plot memory-aware preemption results
+python scripts/plot_results.py --dir out/ --compare
 ```
 
-## Architecture
+## 🌟 Core Features
 
-```
-cmd/tass/main.go             CLI entry point
-internal/
-  config/config.go           JSON configuration loading + validation
-  engine/event.go            Event types (Arrival, Dispatch, TokenStepDone, ...)
-  engine/engine.go           Discrete-event engine with priority queue
-  model/request.go           Request struct with scheduling state
-  model/cluster.go           Worker + Cluster with KV-cache memory tracking
-  model/kvcache.go           KV-cache memory model
-  model/timing.go            Step-time model (calibration point for GPU benchmarks)
-  workload/generator.go      Poisson, Bursty, Trace CSV generators
-  scheduler/scheduler.go     Scheduler interface
-  scheduler/fifo.go          FIFO scheduling
-  scheduler/priority.go      Tier-based priority
-  scheduler/wfq.go           Weighted Fair Queue
-  scheduler/srtf.go          Shortest Remaining Tokens First
-  scheduler/dynbatch.go      Latency-aware dynamic batching
-  metrics/collector.go       Per-request + system metrics, fairness index
-  metrics/exporter.go        CSV + JSON export
-  util/heap.go               Generic priority queue
-  util/stats.go              Percentile, Jain's index
-  util/rng.go                Deterministic seeded RNG
-docs/
-  ARCHITECTURE.md            Event flow + design details
-  POLICY_NOTES.md            Scheduling policy explanations + tradeoffs
-examples/
-  config.json                Bursty stress scenario config
-  trace.csv                  Sample trace file
-scripts/
-  plot_results.py            Visualization script
-```
+- **PagedAttention & Preemption**: Simulates block-based memory allocation and evicts/recomputes requests on Out-Of-Memory (OOM) events based on a dynamic KV-cache model.
+- **Prefix Caching**: Evaluates context-hit-rates for shared system prompts, accurately bypassing prefill computation metrics in continuous batching scenarios.
+- **Advanced Schedulers**: Includes standard `FIFO`, Tier-based `Priority`, `WFQ` (Weighted Fair Queuing), `SRTF` (Shortest Remaining Tokens First), and dynamic tail-latency aware batching.
+- **Bursty Traffic Generators**: Simulates spiky production traffic versus uniform Poisson arrivals.
 
 ## Configuration
 

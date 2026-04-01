@@ -86,8 +86,17 @@ def plot_comparison(summaries, output_path, plt):
     policies = [s['SchedulerName'] for s in summaries]
     throughputs = [s['ThroughputTokSec'] for s in summaries]
     p95s = [s['OverallP95Ms'] for s in summaries]
+    
+    # Calculate average SLA violation across tiers
+    sla_viols = []
+    for s in summaries:
+        if 'TierMetrics' in s and s['TierMetrics']:
+            viols = [tm['SLATotalViol'] * 100 for tm in s['TierMetrics']]
+            sla_viols.append(sum(viols) / len(viols))
+        else:
+            sla_viols.append(0)
 
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(16, 5))
 
     ax1.bar(policies, throughputs, color='steelblue', edgecolor='black')
     ax1.set_ylabel('Throughput (tok/s)')
@@ -98,6 +107,11 @@ def plot_comparison(summaries, output_path, plt):
     ax2.set_ylabel('P95 Latency (ms)')
     ax2.set_title('P95 Latency by Policy')
     ax2.tick_params(axis='x', rotation=30)
+    
+    ax3.bar(policies, sla_viols, color='crimson', edgecolor='black')
+    ax3.set_ylabel('Avg SLA Violation (%)')
+    ax3.set_title('SLA Violation by Policy')
+    ax3.tick_params(axis='x', rotation=30)
 
     plt.tight_layout()
     plt.savefig(output_path, dpi=150)
