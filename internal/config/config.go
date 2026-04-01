@@ -19,24 +19,26 @@ type Config struct {
 
 // ClusterConfig defines the simulated cluster.
 type ClusterConfig struct {
-	NumWorkers    int     `json:"num_workers"`
-	MemoryGB      float64 `json:"memory_gb"`       // GPU memory per worker in GB
-	MaxBatchSize  int     `json:"max_batch_size"`
+	NumWorkers     int     `json:"num_workers"`
+	MemoryGB       float64 `json:"memory_gb"` // GPU memory per worker in GB
+	MaxBatchSize   int     `json:"max_batch_size"`
+	PagedAttention bool    `json:"paged_attention"` // Enable dynamic memory allocation
 }
 
 // WorkloadConfig defines how requests are generated.
 type WorkloadConfig struct {
-	Type            string  `json:"type"`             // "poisson", "bursty", "trace"
-	RPS             float64 `json:"rps"`              // For poisson
-	PeakRPS         float64 `json:"peak_rps"`         // For bursty
-	BurstDurationMs float64 `json:"burst_duration_ms"`
-	IdleDurationMs  float64 `json:"idle_duration_ms"`
-	TraceFile       string  `json:"trace_file"`       // For trace
-	DurationMs      float64 `json:"duration_ms"`      // Total simulation duration
-	ContextTokens   TokenRange `json:"context_tokens"`
-	OutputTokens    TokenRange `json:"output_tokens"`
+	Type            string             `json:"type"`             // "poisson", "bursty", "trace"
+	RPS             float64            `json:"rps"`              // For poisson
+	PeakRPS         float64            `json:"peak_rps"`         // For bursty
+	BurstDurationMs float64            `json:"burst_duration_ms"`
+	IdleDurationMs  float64            `json:"idle_duration_ms"`
+	TraceFile       string             `json:"trace_file"`       // For trace
+	DurationMs      float64            `json:"duration_ms"`      // Total simulation duration
+	ContextTokens   TokenRange         `json:"context_tokens"`
+	OutputTokens    TokenRange         `json:"output_tokens"`
 	TierWeights     map[string]float64 `json:"tier_weights"` // tier name -> probability weight
-	Seed            int64   `json:"seed"`
+	Seed            int64              `json:"seed"`
+	PrefixHitRate   float64            `json:"prefix_hit_rate"` // Probability of a request sharing a prefix
 }
 
 // TokenRange defines a min/max range for token counts.

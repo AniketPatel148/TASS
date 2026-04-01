@@ -18,6 +18,10 @@ type Request struct {
 	OutputTokens  int     // Total number of output tokens to generate
 	ArrivalMs     float64 // Arrival time in simulation milliseconds
 
+	PrefixID            string // System prompt or context prefix identifier
+	MatchedPrefixTokens int    // Number of tokens retrieved from prefix cache
+	Preemptions         int    // Number of times request was evicted due to OOM
+
 	// --- Scheduling state (mutated during simulation) ---
 
 	EnqueueMs       float64 // Time the request was enqueued to a scheduler

@@ -28,7 +28,7 @@ type Engine struct {
 
 // NewEngine creates a simulation engine from config and scheduler.
 func NewEngine(cfg *config.Config, sched scheduler.Scheduler, collector *metrics.Collector) *Engine {
-	cluster := model.NewCluster(cfg.Cluster.NumWorkers, cfg.Cluster.MemoryGB, cfg.Cluster.MaxBatchSize)
+	cluster := model.NewCluster(cfg.Cluster.NumWorkers, cfg.Cluster.MemoryGB, cfg.Cluster.MaxBatchSize, cfg.Cluster.PagedAttention)
 	timing := model.NewTimingModel(cfg.Timing.BaseMs, cfg.Timing.PerTokenMs, cfg.Timing.PerBatchMs)
 
 	return &Engine{
