@@ -1,68 +1,78 @@
-# TASS — Token-Aware Scheduling Simulator
+<div align="center">
+  
+# 🚀 TASS
+**Token-Aware Scheduling Simulator for LLM Inference**
 
-My personal sandbox for exploring the frontier of continuous batching and memory-aware scheduling. A production-quality discrete-event simulator modeling multi-tenant LLM inference, PagedAttention (with Recomputation Preemption), Prefix Caching, dynamic batching, and priority queuing.
+[![Go Report Card](https://goreportcard.com/badge/github.com/AniketPatel148/TASS)](https://goreportcard.com/report/github.com/AniketPatel148/TASS)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## Quick Start
+*My personal sandbox for exploring the frontier of continuous batching, memory-aware scheduling, and LLM inference optimization.*
+
+</div>
+
+---
+
+## 💡 The Vision
+
+As LLMs scale, the true bottleneck has shifted from raw compute to **memory bandwidth** and **KV-Cache management**. **TASS** is a production-quality, discrete-event simulator built to explicitly model these granular dynamics. 
+
+It replicates the architectural constraints faced by state-of-the-art inference engines (like vLLM, ORCA, and LightLLM) to experiment with custom scheduling policies under extreme, production-like load.
+
+## 🌟 Core Architecture
+
+This simulator goes far beyond standard M/M/1 mathematical queuing models. It accurately mimics the token-by-token autoregressive decoding loop of modern hardware:
+
+- 🧠 **PagedAttention & Preemption**: Simulates dynamic, non-contiguous block-based memory allocation. It features a realistic Out-Of-Memory (OOM) admission controller that forces eviction and recomputation limits when KV-cache is physically exhausted.
+- ⚡ **Prefix Caching Hit-Rates**: Tracks prefix hits for shared prompts. Cached KV-blocks seamlessly bypass prefill computation latency during heavily concurrent continuous batching scenarios.
+- 🚦 **Advanced Schedulers**: Ships with standard `FIFO`, Tier-based `Priority`, `WFQ` (Weighted Fair Queuing), `SRTF` (Shortest Remaining Tokens First), and dynamic tail-latency aware batching algorithms out-of-the-box.
+- 📉 **Bursty Workload Engine**: Directly simulates spiky, real-world API traffic via Poisson distributions, customizable burst periods, and deterministic CSV trace replays.
+
+---
+
+## 🚀 Quick Start & Experiments
+
+Get the engine running in seconds and plot the SLA violation differences when PagedAttention is enabled:
 
 ```bash
-# Build
+# 1. Build the simulator
 go build ./cmd/tass
 
-# Run baseline FIFO scheduler vs PagedAttention/PrefixCaching simulator
-go run ./cmd/tass --config experiments/s4_bursty/config.json --out out/baseline_srtf --verbose
+# 2. Run a heavily loaded Baseline FIFO scheduler (Static KV allocation)
+go run ./cmd/tass --config experiments/s4_bursty/config.json --out out/baseline_fifo --verbose
+
+# 3. Run the exact same load with PagedAttention and Prefix Caching enabled via SRTF
 go run ./cmd/tass --config experiments/s4_bursty/config_paged.json --out out/paged_srtf --verbose
 
-# Plot memory-aware preemption results
+# 4. Generate visual comparisons across policies
 python scripts/plot_results.py --dir out/ --compare
 ```
 
-## 🌟 Core Features
+---
 
-- **PagedAttention & Preemption**: Simulates block-based memory allocation and evicts/recomputes requests on Out-Of-Memory (OOM) events based on a dynamic KV-cache model.
-- **Prefix Caching**: Evaluates context-hit-rates for shared system prompts, accurately bypassing prefill computation metrics in continuous batching scenarios.
-- **Advanced Schedulers**: Includes standard `FIFO`, Tier-based `Priority`, `WFQ` (Weighted Fair Queuing), `SRTF` (Shortest Remaining Tokens First), and dynamic tail-latency aware batching.
-- **Bursty Traffic Generators**: Simulates spiky production traffic versus uniform Poisson arrivals.
+## 📊 Interpreting Results
 
-## Configuration
+Every simulation outputs pristine run summaries (`summary.json`) and granular per-request traces (`requests.csv`). Use these to track:
 
-See [`examples/config.json`](examples/config.json) for a complete example. Key sections:
+- **TTFT (Time to First Token)**: Absolute system responsiveness (Lower is better).
+- **P95/P99 Latency**: Absolute tail latencies measuring worst-case inference distributions.
+- **SLA Violation %**: Fraction of requests breaching hard tier-based SLA thresholds.
+- **Fairness Index**: Jain's fairness index enforcing tier proportionality (1.0 = perfectly fair).
+- **Throughput (tok/s)**: Total KV tokens successfully emitted per second of simulation uptime.
 
-| Section | Description |
-|---------|-------------|
-| `cluster` | Number of workers, GPU memory (GB), max batch size |
-| `workload` | Arrival pattern (poisson/bursty/trace), RPS, token ranges, tier weights |
-| `scheduler` | Policy name: `fifo`, `priority`, `wfq`, `srtf`, `dynbatch` |
-| `tiers` | User tiers with priority, weight, and SLA thresholds |
-| `timing` | Step-time model parameters (base_ms, per_token_ms, per_batch_ms, kv_per_token_gb) |
+## 🛠 Extending: Non-Linear GPU Calibration
 
-## Output
+TASS allows custom injection of hardware profiles. The mathematical timing model lives in [`internal/model/timing.go`](internal/model/timing.go). To calibrate with real clusters (e.g., A100s/H100s):
 
-Single run produces:
-- `summary.json` — Run summary with per-tier metrics
-- `requests.csv` — Per-request latency breakdown (when using `--compare`, per-policy subdirectories)
+1. Profile your hardware with varying batch sizes and context lengths using Nsight Compute.
+2. Fit the architectural bounds: `base_ms`, `per_token_ms`, `per_batch_ms`.
+3. Subclass the `TimingModel` with non-linear roofline equations!
 
-## Interpreting Results
-
-- **TTFT (Time to First Token)**: Measures responsiveness. Lower is better.
-- **P95/P99 Latency**: Tail latency at the 95th and 99th percentiles.
-- **SLA Violation %**: Fraction of requests exceeding the tier's SLA threshold.
-- **Fairness Index**: Jain's fairness index across tiers (1.0 = perfectly fair).
-- **Throughput (tok/s)**: Total tokens generated per second of simulation time.
-
-## Extending: GPU Calibration
-
-The timing model lives in [`internal/model/timing.go`](internal/model/timing.go). To calibrate with real GPU benchmarks:
-
-1. Profile your GPU with varying batch sizes and sequence lengths
-2. Fit the parameters: `base_ms`, `per_token_ms`, `per_batch_ms`
-3. Update the config or subclass `TimingModel` with a non-linear model
-
-## Running Tests
+## 🧪 Testing
 
 ```bash
 go test ./...
 ```
 
-## License
+## 📜 License
 
 MIT
