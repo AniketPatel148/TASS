@@ -51,6 +51,8 @@ python scripts/plot_results.py --dir out/ --compare
 
 ## Interpreting Results
 
+![Scheduling Policies Comparison](assets/comparison.png)
+
 Every simulation outputs pristine run summaries (`summary.json`) and granular per-request traces (`requests.csv`). Use these to track:
 
 - **TTFT (Time to First Token)**: Absolute system responsiveness (Lower is better).
